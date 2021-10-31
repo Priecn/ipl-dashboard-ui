@@ -1,7 +1,11 @@
+    import './TeamPage.scss';
     import { React, useEffect, useState } from 'react';
     import { useParams } from 'react-router-dom';
     import { MatchDetailCard } from '../components/MatchDetailCard';
     import { MatchSmallCard } from '../components/MatchSmallCard';
+    import { PieChart } from 'react-minimal-pie-chart';
+    import { FaAngleDoubleRight } from 'react-icons/fa';
+
     export const TeamPage =  () => {
 
 
@@ -49,10 +53,28 @@
         } else {
             return (
                 <div className="TeamPage">
-                    <h1>{ team.name }</h1>
-                    <MatchDetailCard match={ team.matchList[0] } teamName={ team.name }/>
+                    <div className="team-name-section">
+                        <h1 className = "team-name">{ team.name }</h1>
+                    </div>
+                    <div className="win-loss-section">
+                    <PieChart data={[
+                                { title: 'Loss', value: team.totalMatchPlayed - team.totalWins, color: '#975050' },
+                                { title: 'Wins', value: team.totalWins, color: '#53a553' }
+                            ]}
+                    />
+                    </div>
+                    
+                    <div className="match-detail-section">
+                        <h3>Latest Matches</h3>
+                        <MatchDetailCard match={ team.matchList[0] } teamName={ team.name }/>
+                    </div>
+                    
 
                     {team.matchList.slice(1).map(m => <MatchSmallCard match={m} teamName={ team.name } key={ m.id }/>)}
+
+                    <div className="show-more">
+                        <a href="#"> <FaAngleDoubleRight /></a>
+                    </div>
                 </div>
             );
         }
