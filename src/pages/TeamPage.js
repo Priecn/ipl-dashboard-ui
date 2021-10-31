@@ -13,7 +13,7 @@
         const [error, setError] = useState(null);
         const [isLoaded, setIsLoaded] = useState(false);
 
-        const latestYear = process.env.REACT_APP_DATA_END_YEAR;
+        let latestYear;
 
         const {teamName} = useParams();
 
@@ -53,6 +53,7 @@
                         <h1>Not Found - 404 !!</h1>
                     </div>);
         } else {
+            latestYear = team.matchList[0].matchDate.split('-')[0];
             return (
                 <div className="TeamPage">
                     <div className="team-name-section">
@@ -72,7 +73,10 @@
                     </div>
                     
 
-                    {team.matchList.slice(1).map(m => <MatchSmallCard match={m} teamName={ team.name } key={ m.id }/>)}
+                    {
+                        team.matchList.slice(1).map(m => <MatchSmallCard match={m} teamName={ team.name } key={ m.id }/>)
+                    
+                    }
 
                     <div className="show-more">
                         <Link to={ `/teams/${team.name}/matches/${latestYear}` }> 

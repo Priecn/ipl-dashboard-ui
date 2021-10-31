@@ -1,0 +1,10 @@
+.TeamTile {
+    display: grid;
+
+    grid-template-rows: 1fr 0.5fr;
+    grid-row-gap: 1rem;
+    align-content: center;
+    justify-content: center;
+
+    max-height: 10rem;
+}
