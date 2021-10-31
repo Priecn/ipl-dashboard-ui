@@ -1,6 +1,8 @@
+import './MatchPage.scss';
 import { React,  useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { MatchDetailCard } from "../components/MatchDetailCard";
+import { YearSelector } from '../components/YearSelector';
 
 export const MatchPage =  () => {
 
@@ -47,11 +49,20 @@ export const MatchPage =  () => {
                 </div>);
     } else {
         return (
-            <div className="MatchPage">
-            <h3>Matche Page</h3>
-            <p>{ teamName } - { year }</p>
-            {matchList.map(m => <MatchDetailCard match={m} teamName={ teamName } key={ m.id }/>)}
+          <div className="MatchPage">
+            <div className="team-name-section">
+              <h1 className="team-name">{teamName}</h1>
+              <YearSelector selectedYear = { year } teamName = { teamName } />
             </div>
+            {
+            matchList.length === 0 ?
+                <h2> No matches found for this year, try different year!</h2>
+                :
+                matchList.map((m) => (
+                    <MatchDetailCard match={m} teamName={teamName} key={m.id} />
+                ))
+            }       
+          </div>
         );
     }
 }

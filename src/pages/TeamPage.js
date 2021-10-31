@@ -1,6 +1,6 @@
     import './TeamPage.scss';
     import { React, useEffect, useState } from 'react';
-    import { useParams } from 'react-router-dom';
+    import { useParams, Link } from 'react-router-dom';
     import { MatchDetailCard } from '../components/MatchDetailCard';
     import { MatchSmallCard } from '../components/MatchSmallCard';
     import { PieChart } from 'react-minimal-pie-chart';
@@ -12,6 +12,8 @@
         const [team, setTeam] = useState();
         const [error, setError] = useState(null);
         const [isLoaded, setIsLoaded] = useState(false);
+
+        const latestYear = process.env.REACT_APP_DATA_END_YEAR;
 
         const {teamName} = useParams();
 
@@ -73,7 +75,9 @@
                     {team.matchList.slice(1).map(m => <MatchSmallCard match={m} teamName={ team.name } key={ m.id }/>)}
 
                     <div className="show-more">
-                        <a href="#"> <FaAngleDoubleRight /></a>
+                        <Link to={ `/teams/${team.name}/matches/${latestYear}` }> 
+                            <FaAngleDoubleRight />
+                        </Link>
                     </div>
                 </div>
             );

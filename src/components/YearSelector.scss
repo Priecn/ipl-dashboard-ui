@@ -1,0 +1,17 @@
+.YearSelector {
+
+    display: flex;
+    flex-wrap: wrap;
+
+    .year {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        background-color: #282c34;
+    }
+
+    .selectedYear {
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        background-color: #fff;
+    }
+}
